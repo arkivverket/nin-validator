@@ -1,0 +1,173 @@
+import TestRecord from "./testdata.testrecord"
+import { NinNumberType } from "../src/nin-validator"
+
+export const fnumbers: TestRecord[] = [
+	{
+		nin: "03125463265",
+		gender: "F",
+		dob: new Date("1854-12-03"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "18112481504",
+		gender: "M",
+		dob: new Date("2024-11-18"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "23047652480",
+		gender: "F",
+		dob: new Date("1876-04-23"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "21067403735",
+		gender: "M",
+		dob: new Date("1974-06-21"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "20094229627",
+		gender: "F",
+		dob: new Date("1942-09-20"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "08015409844",
+		gender: "F",
+		dob: new Date("1954-01-08"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "22061202203",
+		gender: "F",
+		dob: new Date("1912-06-22"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "02051433257",
+		gender: "F",
+		dob: new Date("1914-05-02"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "18125841763",
+		gender: "M",
+		dob: new Date("1958-12-18"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "03010882663",
+		gender: "F",
+		dob: new Date("2008-01-03"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "04115547998",
+		gender: "M",
+		dob: new Date("1955-11-04"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "31121493457",
+		gender: "F",
+		dob: new Date("2014-12-31"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "03100023058",
+		gender: "F",
+		dob: new Date("1900-10-03"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "31126634156",
+		gender: "M",
+		dob: new Date("1966-12-31"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "01036744320",
+		gender: "M",
+		dob: new Date("1967-03-01"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "16061465697",
+		gender: "F",
+		dob: new Date("2014-06-16"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "30044629530",
+		gender: "M",
+		dob: new Date("1946-04-30"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "10065240136",
+		gender: "M",
+		dob: new Date("1952-06-10"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "04065994688",
+		gender: "F",
+		dob: new Date("1959-06-04"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "29062489640",
+		gender: "F",
+		dob: new Date("2024-06-29"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "19044018759",
+		gender: "M",
+		dob: new Date("1940-04-19"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "16116626652",
+		gender: "F",
+		dob: new Date("1966-11-16"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "06101776938",
+		gender: "M",
+		dob: new Date("2017-10-06"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "22108742163",
+		gender: "M",
+		dob: new Date("1987-10-22"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "23081403058",
+		gender: "F",
+		dob: new Date("1914-08-23"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "10060372549",
+		gender: "M",
+		dob: new Date("2003-06-10"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "15086664655",
+		gender: "F",
+		dob: new Date("1866-08-15"),
+		type: NinNumberType.BirthNumber,
+	},
+	{
+		nin: "12101210373",
+		gender: "M",
+		dob: new Date("1912-10-12"),
+		type: NinNumberType.BirthNumber,
+	},
+]
