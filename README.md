@@ -5,7 +5,7 @@ This is a validator/parser for norwegian national identity numbers, written in T
 Basic usage is very simple:
 
 ```typescript
-import validateNin from "nin-validator"
+import validateNin from "@digitalarkivet/nin-validator"
 // The default export accepts birth numbers and D-numbers
 if(!validateNin(someNin)) {
     throw "Invalid NIN"
@@ -15,7 +15,7 @@ if(!validateNin(someNin)) {
 To extract more information, use `parseNin`. Then, you have to specify which number types to accept. The export `ALL_NIN_TYPES` include rarely-used types like H-numbers and FH-numbers, while DEFAULT_NIN_TYPES include birth number and D number. You can also mix-and-match by using `NinNumberType` directly.
 
 ```typescript
-import {parseNin, ALL_NIN_TYPES, DEFAULT_NIN_TYPES, NinNumberType} from "nin-validator"
+import {parseNin, ALL_NIN_TYPES, DEFAULT_NIN_TYPES, NinNumberType} from "@digitalarkivet/nin-validator"
 
 const {info, error} = parseNin(someNin, ...ALL_NIN_TYPES)
 // or
