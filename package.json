@@ -16,7 +16,8 @@
     "prepare": "husky install",
     "precommit": "lint-staged",
     "lint": "eslint",
-    "build": "tsc --build tsconfig.dist.json"
+    "build": "tsc --build tsconfig.dist.json",
+    "postinstall": "npm run build"
   },
   "lint-staged": {
     "*.{ts,js}": [
