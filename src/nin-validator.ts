@@ -25,9 +25,19 @@ export enum NinNumberType {
 	HNumber = "H",
 	FHNumber = "FH",
 }
+/**
+ * All possible values of `NinNumberType`
+ */
 export const ALL_NIN_TYPES = Object.values(NinNumberType)
+/**
+ * The "normal" nin types, Birth Number and D Number.
+ */
 export const DEFAULT_NIN_TYPES = [NinNumberType.BirthNumber, NinNumberType.DNumber]
 
+/**
+ * Gender codes from ISO/IEC 5218.
+ *
+ */
 export enum Gender {
 	NotKnown = 0,
 	Male = 1,
@@ -35,10 +45,29 @@ export enum Gender {
 	NotApplicable = 9,
 }
 
+/**
+ * Information about a parsed national identity number
+ */
 export type NinInfo = {
+	/**
+	 * Gender will be {@link Gender.NotKnown} for FH-numbers,
+	 * and in the future for "new" national identification numbers
+	 * that do not carry gender information.
+	 */
 	gender: Gender
+	/**
+	 * Midnight on the date of birth, in local time.
+	 * Contains `undefined` for FH numbers.
+	 */
 	dateOfBirth: Date | undefined
 	numberType: NinNumberType
+	/**
+	 * True if the number matches the format used by ["Tenor"](https://www.skatteetaten.no/skjema/testdata/),
+	 * the test utility of the norwegian tax authority.
+	 *
+	 * Tenor numbers contain valid checksums, but invalid dates.
+	 * The returned {@link dateOfBirth} is adjusted to compensate.
+	 */
 	isTestNumber: boolean
 }
 
