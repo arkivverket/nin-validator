@@ -33,6 +33,7 @@ The `Gender` enum uses the ISO/IEC 5218 codes:
  - 1 = Male;
  - 2 = Female;
  - 9 = Not applicable.
+ 
 `parseNin` will return `Not known` for FH-numbers, and in the future for "new" national identification numbers that do not carry gender information.
 
 ### Date of birth
