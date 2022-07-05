@@ -1,11 +1,14 @@
 {
   "name": "nin-validator",
   "private": true,
+  "main": "dist/nin-validator.js",
+  "types": "dist/nin-validator.d.ts",
   "scripts": {
     "test": "TZ=UTC jest",
     "prepare": "husky install",
     "precommit": "lint-staged",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build": "tsc"
   },
   "lint-staged": {
     "*.{ts,js}": [
