@@ -12,15 +12,17 @@ if(!validateNin(someNin)) {
 }
 ```
 
-To extract more information, use `parseNin`. Then, you have to specify which number types to accept. The export `ALL_NIN_TYPES` include rarely-used types like H-numbers and FH-numbers, while `DEFAULT_NIN_TYPES` include birth number and D number. You can also mix-and-match by using `NinNumberType` directly.
+To extract more information, use `parseNin`. Then, you have the option to specify which number types to accept. The export `ALL_NIN_TYPES` include rarely-used types like H-numbers and FH-numbers, while `DEFAULT_NIN_TYPES` include birth number and D number. You can also mix-and-match by using `NinNumberType` directly.
 
 ```typescript
 import {parseNin, ALL_NIN_TYPES, DEFAULT_NIN_TYPES, NinNumberType} from "@digitalarkivet/nin-validator"
 
-const {info, error} = parseNin(someNin, ...ALL_NIN_TYPES)
-// or
+const {info, error} = parseNin(someNin)
+// Is the same as
 const {info, error} = parseNin(someNin, ...DEFAULT_NIN_TYPES)
-// or
+// Or, to can accept all types (very rarely what you want)@
+const {info, error} = parseNin(someNin, ...ALL_NIN_TYPES)
+// Or, to accept specific types
 const {info, error} = parseNin(someNin, NinNumberType.BirthNumber, NinNumberType.HNumber)
 ```
 

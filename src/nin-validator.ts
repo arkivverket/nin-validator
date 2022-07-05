@@ -1,4 +1,24 @@
-export type NinValidationError = "CHECKSUM" | "FORMAT" | "DATE" | "INVALID_TYPE"
+/**
+ * Possible errors when parsing/validating a nin.
+ */
+export enum NinValidationError {
+	/** The input string is not 11 digits. */
+	Format = "FORMAT",
+	/** The modulus check of the control digits failed */
+	Checksum = "CHECKSUM",
+	/** The date does not exist (leap year?),
+	 * or the century code did not match the individual part of the nin. */
+	Date = "DATE",
+	/**
+	 * the nin is valid,
+	 * but the type is not one of the allowed types passed to {@link parseNin}
+	 */
+	InvalidType = "INVALID_TYPE",
+}
+/**
+ * Types of nins.
+ *
+ */
 export enum NinNumberType {
 	BirthNumber = "F",
 	DNumber = "D",
@@ -41,7 +61,7 @@ const validateChecksumWithWeightsMod11 = (nin: string, weights: number[]): boole
  * and that the date is valid (for number types with a date).
  *
  * @param nationalIdentificationNumber
- * @param allowedTypes
+ * @param allowedTypes List of allowed types. If not specified, defaults to {@link DEFAULT_NIN_TYPES}.
  * @returns Info about the number if applicable. An error if applicable.
  */
 export const parseNin = (
@@ -50,15 +70,16 @@ export const parseNin = (
 ): { info?: NinInfo; error?: NinValidationError } => {
 	const ninPattern = /([0-9]{6})([0-9]{3})([0-9]{2})/
 	const nin = nationalIdentificationNumber
+	const actualAllowedTypes = allowedTypes.length > 0 ? allowedTypes : DEFAULT_NIN_TYPES
 
 	// Check that the value is of the correct length
 	// and that it only consists of numbers
 	if (nin.length !== 11) {
-		return { error: "FORMAT" }
+		return { error: NinValidationError.Format }
 	}
 	const ninParts = nin.match(ninPattern)
 	if (ninParts === null) {
-		return { error: "FORMAT" }
+		return { error: NinValidationError.Format }
 	}
 
 	const [, birthdateString, individualNumberString] = ninParts
@@ -68,13 +89,13 @@ export const parseNin = (
 	const weights1: number[] = [3, 7, 6, 1, 8, 9, 4, 5, 2, 1]
 	const weights2: number[] = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2, 1]
 	if (!validateChecksumWithWeightsMod11(nin, weights1) || !validateChecksumWithWeightsMod11(nin, weights2)) {
-		return { error: "CHECKSUM" }
+		return { error: NinValidationError.Checksum }
 	}
 
 	// Calculate exact birthday for F/D/H-numbers
 	const bdParts = birthdateString.match(/.{2}/g)
 	if (bdParts === null) {
-		return { error: "FORMAT" }
+		return { error: NinValidationError.Format }
 	}
 
 	// Linter wants year to be const, but how to do that while keeping the destructuring?
@@ -128,7 +149,7 @@ export const parseNin = (
 		} else if (individualNumber >= 500 && individualNumber <= 999 && year >= 0 && year <= 39) {
 			fullYear = 2000 + year
 		} else {
-			return { error: "DATE" }
+			return { error: NinValidationError.Date }
 		}
 
 		// Check that the birthdate is a valid date
@@ -136,7 +157,7 @@ export const parseNin = (
 		const date: Date = new Date(fullYear, month - 1, day)
 
 		if (isNaN(date.getDate())) {
-			return { error: "DATE" }
+			return { error: NinValidationError.Date }
 		}
 
 		// Find gender based on individual number
@@ -150,8 +171,8 @@ export const parseNin = (
 		}
 	}
 
-	if (!allowedTypes.includes(info.numberType)) {
-		return { error: "INVALID_TYPE" }
+	if (!actualAllowedTypes.includes(info.numberType)) {
+		return { error: NinValidationError.InvalidType }
 	}
 
 	return { info }
@@ -160,9 +181,12 @@ export const parseNin = (
 /**
  * @param nationalIdentificationNumber The number to validate
  * @param allowed Allowed number types. Must be supplied, or validation will fail.
- * @returns Wether the nin has a valid checksum, and is of the specified type
+ * @returns Wether the nin has a valid checksum, and is one of the specified types
  */
 export const validateNinOfType = (nationalIdentificationNumber: string, ...allowed: NinNumberType[]): boolean => {
+	if (allowed.length == 0) {
+		return false
+	}
 	const { info, error } = parseNin(nationalIdentificationNumber, ...allowed)
 	return info != null && error === undefined
 }

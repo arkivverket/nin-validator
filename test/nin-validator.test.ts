@@ -4,6 +4,7 @@ import defaultValidationMethod, {
 	Gender,
 	ALL_NIN_TYPES,
 	DEFAULT_NIN_TYPES,
+	NinValidationError,
 } from "../src/nin-validator"
 
 import { TestRecord, fnumbers, dnumbers, hnumbers, tenorTestNumbers } from "./testdata"
@@ -48,6 +49,9 @@ const runShouldDefaultValidateTest = (desc: string, data: TestRecord[]) => {
 		for (const d of data) {
 			expect(defaultValidationMethod(d.nin)).toBeTruthy()
 			expect(validateNinOfType(d.nin, ...DEFAULT_NIN_TYPES)).toBeTruthy()
+			expect(parseNin(d.nin).info).toMatchObject({
+				numberType: d.type,
+			})
 		}
 	})
 }
@@ -57,6 +61,7 @@ const runShouldNotDefaultValidateTest = (desc: string, data: TestRecord[]) => {
 		for (const d of data) {
 			expect(defaultValidationMethod(d.nin)).toBeFalsy()
 			expect(validateNinOfType(d.nin, ...DEFAULT_NIN_TYPES)).toBeFalsy()
+			expect(parseNin(d.nin).error).toEqual(NinValidationError.InvalidType)
 		}
 	})
 }
@@ -103,8 +108,8 @@ describe("Invalid checksums", () => {
 			for (const data of testset) {
 				for (let pos = 0; pos <= 10; pos++) {
 					const modifiedNin = modifyDigitAtPosition(data.nin, pos)
-
-					expect(validateNinOfType(modifiedNin, data.type)).toBe(false)
+					expect(validateNinOfType(modifiedNin, data.type)).toBeFalsy()
+					expect(parseNin(modifiedNin, data.type).error).toEqual(NinValidationError.Checksum)
 				}
 			}
 		}
