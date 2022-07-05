@@ -10,6 +10,11 @@ export enum NinNumberType {
   FHNumber = "FH",
 }
 export const ALL_NIN_TYPES = Object.values(NinNumberType);
+export const DEFAULT_NIN_TYPES = [
+  NinNumberType.BirthNumber,
+  NinNumberType.DNumber,
+];
+
 export enum Gender {
   NotKnown = 0,
   Male = 1,
@@ -200,11 +205,7 @@ export const validateNinOfType = (
 export const validateBirthOrDNumber = (
   nationalIdentificationNumber: string
 ): boolean => {
-  return validateNinOfType(
-    nationalIdentificationNumber,
-    NinNumberType.BirthNumber,
-    NinNumberType.DNumber
-  );
+  return validateNinOfType(nationalIdentificationNumber, ...DEFAULT_NIN_TYPES);
 };
 
 export default validateBirthOrDNumber;
