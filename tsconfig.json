@@ -11,12 +11,12 @@
         "moduleResolution": "node",
         "declaration": true,
         "noImplicitAny": true,
-        "outDir": "./dist/",
+        "outDir": "./build/",
         "allowJs": false,
         "baseUrl": "src",
     },
     "exclude": [
         "node_modules",
-        "dist"
+        "build"
     ]
 }

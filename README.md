@@ -20,16 +20,16 @@ import {parseNin, ALL_NIN_TYPES, DEFAULT_NIN_TYPES, NinNumberType} from "@digita
 const {info, error} = parseNin(someNin)
 // Is the same as
 const {info, error} = parseNin(someNin, ...DEFAULT_NIN_TYPES)
-// Or, to can accept all types (very rarely what you want)@
+// Or, to can accept all types (very rarely what you want)
 const {info, error} = parseNin(someNin, ...ALL_NIN_TYPES)
 // Or, to accept specific types
 const {info, error} = parseNin(someNin, NinNumberType.BirthNumber, NinNumberType.HNumber)
 ```
 
-The `info` key will hold `undefined` on error.
-On success, it contains `gender`, `dateOfBirth`, `numberType`, and `isTestNumber`.
+The `info` key will be `undefined` on error.
+On success, it contains an object with `gender`, `dateOfBirth`, `numberType`, and `isTestNumber` keys.
 
-The `error` key will contain a `NinValidationError` on error, and hold `undefined` on success.
+The `error` key will contain a `NinValidationError` on error, and be `undefined` on success.
 
 
 ### The NinInfo type
@@ -53,7 +53,7 @@ One of the `NinNumberType` values. This is a Typescript enum, backed by a string
 #### Test numbers
 This flag is set to true if the number originates from ["Tenor"](https://www.skatteetaten.no/skjema/testdata/), the test utility of the norwegian tax authority.
 
-Since Arkivverket has no reason to exclude test numbers from production use (they will not occur in real archives, and if they do, we want to display them), test numbers can not be rejected when validating a nin.
+Since Arkivverket has no reason to exclude test numbers from production use (they will not occur in real archives, and if they do, we want to display them), test numbers can not be rejected when validating a nin with nin-validator.
 
 ### The NinValidationError type
 

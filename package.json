@@ -1,23 +1,31 @@
 {
   "name": "@digitalarkivet/nin-validator",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Validating and parsing norwegian national identity numbers in Typescript",
   "author": "Arkivverket",
   "homepage": "https://github.com/arkivverket/nin-validator",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arkivverket/nin-validator.git"
+  },
   "bugs": {
     "url": "https://github.com/arkivverket/nin-validator/issues"
   },
   "license": "MIT",
-  "private": true,
-  "main": "dist/nin-validator.js",
-  "types": "dist/nin-validator.d.ts",
+  "main": "build/nin-validator.js",
+  "types": "build/nin-validator.d.ts",
+  "files": [
+    "/build",
+    "/README.md",
+    "/LICENSE"
+  ],
   "scripts": {
     "test": "TZ=UTC jest",
     "prepare": "husky install",
     "precommit": "lint-staged",
     "lint": "eslint",
     "build": "tsc --build tsconfig.dist.json",
-    "postinstall": "npm run build"
+    "prepack": "npm run lint && npm run test && npm run build"
   },
   "lint-staged": {
     "*.{ts,js}": [
@@ -26,9 +34,9 @@
     ]
   },
   "dependencies": {
-    "typescript": "^4.7.4"
   },
   "devDependencies": {
+    "typescript": "^4.7.4",
     "@types/jest": "^28.1.4",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "eslint": "^8.19.0",

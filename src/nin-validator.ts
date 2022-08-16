@@ -1,3 +1,11 @@
+/*
+ * Nin-validator
+ * (c) 2022 Arkivverket
+ *
+ * Validator/parser for norwegian national identity numbers.
+ * Released under the MIT license, see LICENSE file for details
+ */
+
 /**
  * Possible errors when parsing/validating a nin.
  */
