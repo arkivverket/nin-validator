@@ -1,6 +1,6 @@
 {
   "name": "@digitalarkivet/nin-validator",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Validating and parsing norwegian national identity numbers in Typescript",
   "author": "Arkivverket",
   "homepage": "https://github.com/arkivverket/nin-validator",
@@ -33,8 +33,7 @@
       "prettier --write"
     ]
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "typescript": "^4.7.4",
     "@types/jest": "^28.1.4",
